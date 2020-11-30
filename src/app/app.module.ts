@@ -8,6 +8,11 @@ import { BannerComponent } from './banner/banner.component';
 import { CollectionsComponent } from './collections/collections.component';
 import { SaleComponent } from './sale/sale.component';
 import { FooterComponent } from './footer/footer.component';
+import { HomeComponent } from './home/home.component';
+import { ProductsComponent } from './products/products.component';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ShopComponent } from './shop/shop.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +21,12 @@ import { FooterComponent } from './footer/footer.component';
     BannerComponent,
     CollectionsComponent,
     SaleComponent,
-    FooterComponent
+    FooterComponent,
+    HomeComponent,
+    ProductsComponent,
+    AboutComponent,
+    ContactComponent,
+    ShopComponent
   ],
   imports: [
     BrowserModule,
