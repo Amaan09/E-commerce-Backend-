@@ -6,6 +6,7 @@ import { Subject } from 'rxjs';
 export class ProductService {
     constructor(private http: HttpClient) {}
     cartSize = new Subject<number>();
+    total = new Subject<number>();
 
     fetchProducts() {
         return this.http.get<[]>(
@@ -37,15 +38,23 @@ export class ProductService {
     }
 
     fetchCartItems() {
-        return this.http.get<[{
-            _id: { $oid: string }, user_id: string, products: [{
-                product_id: {
-                    $oid: string
-                },
-                size: string,
-                quantity: number
-            }]}]>(
-            'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0'
-        )
+        return this.http.get<any>('http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0')
+    }
+
+    deleteCartProduct(data: any) {
+        this.http.put(
+            'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0',
+            data
+        ).subscribe(res => {
+            console.log(res);
+        })
+    }
+
+    genBill(products: any) {
+        let t = 0;
+        products.forEach(element => {
+            t += (element.price * element.quantity)
+        });
+        this.total.next(t);
     }
 }
