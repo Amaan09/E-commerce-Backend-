@@ -10,7 +10,6 @@ import { CollectionsComponent } from './collections/collections.component';
 import { SaleComponent } from './sale/sale.component';
 import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from './home/home.component';
-import { ProductsComponent } from './products/products.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { ShopComponent } from './shop/shop.component';
@@ -18,6 +17,7 @@ import { CartComponent } from './cart/cart.component';
 import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { FormsModule } from '@angular/forms';
+import { ThankyouComponent } from './thankyou/thankyou.component';
 
 @NgModule({
   declarations: [
@@ -28,13 +28,13 @@ import { FormsModule } from '@angular/forms';
     SaleComponent,
     FooterComponent,
     HomeComponent,
-    ProductsComponent,
     AboutComponent,
     ContactComponent,
     ShopComponent,
     CartComponent,
     ShopDetailComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    ThankyouComponent
   ],
   imports: [
     BrowserModule,

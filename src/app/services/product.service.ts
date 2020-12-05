@@ -21,7 +21,7 @@ export class ProductService {
     } 
 
     storeProduct(cartItem: {product_id: string, size: string, quantity: number }) {
-        return this.http.post(
+        this.http.post(
             'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0',
             cartItem
         ).subscribe(res => {
@@ -41,12 +41,12 @@ export class ProductService {
         return this.http.get<any>('http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0')
     }
 
-    deleteCartProduct(data: any) {
+    deleteCartProduct(data: {product_id: string}) {
         this.http.put(
             'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0',
             data
         ).subscribe(res => {
-            console.log(res);
+            this.fetchCartSize();
         })
     }
 
@@ -56,5 +56,13 @@ export class ProductService {
             t += (element.price * element.quantity)
         });
         this.total.next(t);
+    }
+
+    deleteCartProducts() {
+        this.http.delete(
+            'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0'
+        ).subscribe(res => {
+            this.fetchCartSize();
+        })
     }
 }

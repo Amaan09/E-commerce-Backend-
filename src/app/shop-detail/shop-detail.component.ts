@@ -53,6 +53,7 @@ export class ShopDetailComponent implements OnInit, OnDestroy {
       quantity: quantity
     }
     this.productService.storeProduct(cartItem);
+    this.productService.fetchCartSize();
   }
 
   ngOnDestroy() {

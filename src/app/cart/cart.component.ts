@@ -24,7 +24,6 @@ export class CartComponent implements OnInit, OnDestroy {
       this.cartId = res[0]._id.$oid;
       this.cartProducts = [...this.product1.map((p1, i) => Object.assign({}, p1, this.product2[i]))];
       this.productService.genBill(this.cartProducts);
-      console.log(this.cartProducts)
     });
     this.productService.total.subscribe(data => {
       this.total = data;
@@ -36,10 +35,6 @@ export class CartComponent implements OnInit, OnDestroy {
   }
 
   onDelete(id: string) {
-    const product = {
-      product_id: id
-    }
-    
-    this.productService.deleteCartProduct(product);
+    this.productService.deleteCartProduct({product_id: id});
   }
 }
