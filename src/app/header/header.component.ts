@@ -13,7 +13,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.productService.fetchCartSize();
+    // this.productService.fetchCartSize();
     this.productService.cartSize.subscribe(res => {
       this.cartSize = res;
     }

@@ -19,13 +19,21 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   constructor(private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.cartSubscription = this.productService.fetchCartItems().subscribe(res => {
+    this.productService.fetchCartItems();
+    this.cartSubscription = this.productService.cartChanged.subscribe(res => {
       this.product1 = res[0].products;
       this.product2 = res[0].productObjects;
       this.cartId = res[0]._id.$oid;
       this.cartProducts = [...this.product1.map((p1, i) => Object.assign({}, p1, this.product2[i]))];
       this.productService.genBill(this.cartProducts);
-    });
+    })
+    // this.cartSubscription = this.productService.fetchCartItems().subscribe(res => {
+    //   this.product1 = res[0].products;
+    //   this.product2 = res[0].productObjects;
+    //   this.cartId = res[0]._id.$oid;
+    //   this.cartProducts = [...this.product1.map((p1, i) => Object.assign({}, p1, this.product2[i]))];
+    //   this.productService.genBill(this.cartProducts);
+    // });
     this.productService.total.subscribe(data => {
       this.total = data;
     })

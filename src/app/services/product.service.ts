@@ -7,6 +7,7 @@ export class ProductService {
     constructor(private http: HttpClient) {}
     cartSize = new Subject<number>();
     total = new Subject<number>();
+    cartChanged = new Subject<any>();
 
     fetchProducts() {
         return this.http.get<[]>(
@@ -22,7 +23,7 @@ export class ProductService {
 
     storeProduct(cartItem: {product_id: string, size: string, quantity: number }) {
         this.http.post(
-            'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0',
+            'http://127.0.0.1:5000/cart/5fcd0da5b6bc1c7c6be296b9',
             cartItem
         ).subscribe(res => {
             this.fetchCartSize();
@@ -31,22 +32,31 @@ export class ProductService {
 
     fetchCartSize() {
         this.http.get<{count: number}>(
-            'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0/count'
+            'http://127.0.0.1:5000/cart/5fcd0da5b6bc1c7c6be296b9/count'
         ).subscribe(res => {
             this.cartSize.next(res.count);
         })
     }
 
+    // fetchCartItems() {
+    //     return this.http.get<any>('http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0')
+    // }
+
     fetchCartItems() {
-        return this.http.get<any>('http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0')
+        this.http.get<any>(
+            'http://127.0.0.1:5000/cart/5fcd0da5b6bc1c7c6be296b9'
+        ).subscribe(res => {
+            this.cartChanged.next(res);
+        })
     }
 
     deleteCartProduct(data: {product_id: string}) {
         this.http.put(
-            'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0',
+            'http://127.0.0.1:5000/cart/5fcd0da5b6bc1c7c6be296b9',
             data
         ).subscribe(res => {
             this.fetchCartSize();
+            this.fetchCartItems();
         })
     }
 
@@ -60,9 +70,9 @@ export class ProductService {
 
     deleteCartProducts() {
         this.http.delete(
-            'http://127.0.0.1:5000/cart/5fc9dc298e843616fc4ca1c0'
+            'http://127.0.0.1:5000/cart/5fcd0da5b6bc1c7c6be296b9'
         ).subscribe(res => {
-            this.fetchCartSize();
+            this.cartSize.next(0);
         })
     }
 }
