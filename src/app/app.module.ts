@@ -18,6 +18,8 @@ import { ShopDetailComponent } from './shop-detail/shop-detail.component';
 import { CheckoutComponent } from './checkout/checkout.component';
 import { FormsModule } from '@angular/forms';
 import { ThankyouComponent } from './thankyou/thankyou.component';
+import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import { ThankyouComponent } from './thankyou/thankyou.component';
     CartComponent,
     ShopDetailComponent,
     CheckoutComponent,
-    ThankyouComponent
+    ThankyouComponent,
+    LoginComponent,
+    SignupComponent
   ],
   imports: [
     BrowserModule,
